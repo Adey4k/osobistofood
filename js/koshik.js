@@ -2,6 +2,7 @@ const cartWrapper = document.querySelector('.cart-wrapper');
 
 window.addEventListener('click', function (event) {
     if (event.target.hasAttribute('data-cart')) {
+
         const card = event.target.closest('.card');
 
         // Збираємо інформацію про товар
@@ -52,22 +53,34 @@ window.addEventListener('click', function (event) {
             cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
         }
 
-        // Оновлюємо статус кошика (порожній/непорожній)
-        updateCartStatus();
+ToogleCartStatus()
     }
 });
 
-// Функція для оновлення статусу кошика
-function updateCartStatus() {
+function ToogleCartStatus(){
+    const cartWrapper=document.querySelector('.cart-wrapper');
     const cartEmptyBadge = document.querySelector('[data-cart-empty]');
-    const cartTotal = document.querySelector('.cart-total');
-    const itemsInCart = cartWrapper.querySelectorAll('.cart-item');
-
-    if (itemsInCart.length > 0) {
-        cartEmptyBadge.classList.add('d-none');
-        cartTotal.classList.remove('d-none');
-    } else {
-        cartEmptyBadge.classList.remove('d-none');
-        cartTotal.classList.add('d-none');
+    if(cartWrapper.children.length>0){
+        cartEmptyBadge.classList.add('none')
+    }
+    else{
+        cartEmptyBadge.classList.remove('none')
     }
 }
+
+window.addEventListener('click', function(event){
+    const counterWrapper = event.target.closest('.counter-wrapper');
+    const counter = counterWrapper.querySelector('[data-counter]');
+    if(event.target.dataset.action === 'minus'){
+        if (counter.innerText > 0){
+            counter.innerText=--counter.innerText;  
+    }}
+    if(event.target.dataset.action === 'plus'){
+        counter.innerText=++counter.innerText;
+    }
+    if(event.target.closest('.cart-wrapper')&& parseInt(counter.innerText)===0){
+        event.target.closest('.cart-item').remove();
+        ToogleCartStatus()
+    }
+})
+
