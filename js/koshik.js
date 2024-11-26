@@ -80,9 +80,8 @@ window.addEventListener('click', function (event) {
             // Удаляем товар из корзины, если его количество стало 0
             event.target.closest('.cart-item').remove();
             ToogleCartStatus();
-            
         }
-    }
+    }calcCartPrice()
 
     if (event.target.dataset.action === 'plus') {
         counter.innerText = ++counter.innerText;
@@ -97,7 +96,7 @@ window.addEventListener('click', function (event) {
         // Синхронизация карточка/корзина
         updateCartCounter(productId, parseInt(counter.innerText));
     }
-    calcCartPrice();
+    calcCartPrice()
 });
 
 // Функция для обновления количества в карточке товара
