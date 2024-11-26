@@ -22,28 +22,30 @@ window.addEventListener('click', function (event) {
             counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.counter);
         } else {
             const cartItemHTML = `
-                <div class="cart-item" data-id="${productInfo.id}">
-                    <div class="cart-item__top">
-                        <div class="cart-item__img">
-                            <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
-                        </div>
-                        <div class="cart-item__desc">
-                            <div class="cart-item__title">${productInfo.title}</div>
-                            <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
-                            <div class="cart-item__details">
-                                <div class="items items--small counter-wrapper">
-                                    <div class="items__control" data-action="minus">-</div>
-                                    <div class="items__current" data-counter>${productInfo.counter}</div>
-                                    <div class="items__control" data-action="plus">+</div>
-                                </div>
-                                <div class="price">
-                                    <div class="price__currency">${productInfo.price}</div>
-                                </div>
+            <div class="cart-item" data-id="${productInfo.id}">
+                <div class="cart-item__top">
+                    <div class="cart-item__img">
+                        <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
+                    </div>
+                    <div class="cart-item__desc">
+                        <div class="cart-item__title">${productInfo.title}</div>
+                        <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
+                        <div class="cart-item__details">
+                            <div class="items items--small counter-wrapper">
+                                <div class="items__control" data-action="minus">-</div>
+                                <div class="items__current" data-counter>${productInfo.counter}</div>
+                                <div class="items__control" data-action="plus">+</div>
                             </div>
+                            <div class="price">
+                                <div class="price__currency">${productInfo.price}</div>
+                            </div>
+                            <button class="btn btn-danger btn-sm remove-item">×</button>
                         </div>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
+        
             cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
         }
 
@@ -79,9 +81,9 @@ window.addEventListener('click', function (event) {
         } else if (isInCart) {
             // Удаляем товар из корзины, если его количество стало 0
             event.target.closest('.cart-item').remove();
-            ToogleCartStatus();
         }
-    }calcCartPrice()
+    }
+
 
     if (event.target.dataset.action === 'plus') {
         counter.innerText = ++counter.innerText;
@@ -96,7 +98,8 @@ window.addEventListener('click', function (event) {
         // Синхронизация карточка/корзина
         updateCartCounter(productId, parseInt(counter.innerText));
     }
-    calcCartPrice()
+    calcCartPrice();
+    ToogleCartStatus();
 });
 
 // Функция для обновления количества в карточке товара
@@ -172,3 +175,21 @@ function calcCartPrice() {
 
     totalPriceEl.innerText = `${totalPrice}`;
 }
+
+
+cartWrapper.addEventListener('click', function (event) {
+    if (event.target.classList.contains('remove-item')) {
+        const cartItem = event.target.closest('.cart-item');
+        const productId = cartItem.dataset.id;
+
+        // Удаляем товар из корзины
+        cartItem.remove();
+
+        // Сбрасываем счетчик в карточке
+        updateCardCounter(productId, 1);
+
+        // Обновляем статус корзины и общую стоимость
+        ToogleCartStatus();
+        calcCartPrice();
+    }
+});
