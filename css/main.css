@@ -236,3 +236,29 @@ h3, h4 {
     top: 10px;
     z-index: 1000; 
 }
+
+
+.cart-item {
+    position: relative; /* Это нужно для позиционирования крестика внутри каждого товара */
+}
+
+.cart-item .remove-item {
+    position: absolute; /* Абсолютное позиционирование внутри каждого товара */
+    top: 5px; /* Отступ сверху */
+    right: 5px; /* Отступ справа */
+    background: transparent; /* Прозрачный фон */
+    border: none; /* Убираем границу */
+    color: #eb5a1e; /* Цвет крестика */
+    font-size: 16px; /* Размер крестика */
+    font-weight: bold; /* Жирность */
+    cursor: pointer; /* Указатель при наведении */
+    line-height: 1;
+    padding: 0;
+    z-index: 10; /* Чтобы крестик был сверху */
+}
+
+.cart-item .remove-item:hover {
+    color: #ff3e00; /* Цвет крестика при наведении */
+    transform: scale(1.2); /* Увеличение при наведении */
+    transition: 0.2s ease-in-out; /* Плавный переход */
+}
