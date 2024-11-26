@@ -230,3 +230,9 @@ h3, h4 {
     margin-top: 0;
     font-size: 24px;
 }
+
+.card.mb-4 {
+    position: sticky;
+    top: 10px;
+    z-index: 1000; 
+}
