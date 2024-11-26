@@ -174,14 +174,7 @@
 
 					<!-- Оформити замовлення -->
 					<div id="order-form" class="card-body border-top">
-						<h5 class="card-title">Оформити замовлення</h4>
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control" placeholder="Ваш номер телефону">
-								<br>
-							</div>
-							<button type="submit" class="btn btn-primary">ЗАМОВИТИ</button>
-						</form>
+							<button type="submit" class="btn btn-primary">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
 					</div>
 					<!-- // Оформити замовлення -->
 
@@ -192,7 +185,28 @@
 			</div>
 		</div>
 	</div>
-
+	<div id="order-modal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>Оформлення замовлення</h2>
+			<form id="order-form">
+				<div class="form-group">
+					<label for="customer-name">Ваше ім'я:</label>
+					<input type="text" id="customer-name" class="form-control" placeholder="Введіть ваше ім'я" required>
+				</div>
+				<div class="form-group">
+					<label for="customer-phone">Номер телефону:</label>
+					<input type="tel" id="customer-phone" class="form-control" placeholder="Введіть ваш номер телефону" required>
+				</div>
+				<div class="form-group">
+					<label for="order-notes">Додаткова інформація:</label>
+					<textarea id="order-notes" class="form-control" placeholder="Коментар до замовлення"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary">Підтвердити замовлення</button>
+			</form>
+		</div>
+	</div>
+	
 	<!-- ВАШІ СКРИПТИ -->
 	<script src = "js\my.js"></script>
 	<script src = "js\koshik.js"></script>
