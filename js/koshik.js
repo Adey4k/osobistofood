@@ -17,43 +17,45 @@ window.addEventListener('click', function (event) {
 
         const itemInCart = cartWrapper.querySelector(`[data-id="${productInfo.id}"]`);
 
-        if (itemInCart) {
-            const counterElement = itemInCart.querySelector('[data-counter]');
-            const newCounterValue = parseInt(counterElement.innerText) + 1;
-        
-            counterElement.innerText = newCounterValue;
-        
-        } else {
-            const cartItemHTML = `
-                <div class="cart-item" data-id="${productInfo.id}">
-                    <div class="cart-item__top">
-                        <div class="cart-item__img">
-                            <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
+if (itemInCart) {
+    const counterElement = itemInCart.querySelector('[data-counter]');
+    const newCounterValue = parseInt(counterElement.innerText) + 1; // Додаємо +1
+
+    counterElement.innerText = newCounterValue;
+
+    // Синхронізуємо з карткою товару
+    updateCardCounter(productInfo.id, newCounterValue);
+} else {
+    const cartItemHTML = `
+        <div class="cart-item" data-id="${productInfo.id}">
+            <div class="cart-item__top">
+                <div class="cart-item__img">
+                    <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
+                </div>
+                <div class="cart-item__desc">
+                    <div class="cart-item__title">${productInfo.title}</div>
+                    <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
+                    <div class="cart-item__details">
+                        <div class="items items--small counter-wrapper">
+                            <div class="items__control" data-action="minus">-</div>
+                            <div class="items__current" data-counter>1</div> <!-- Завжди додаємо 1 -->
+                            <div class="items__control" data-action="plus">+</div>
                         </div>
-                        <div class="cart-item__desc">
-                            <div class="cart-item__title">${productInfo.title}</div>
-                            <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
-                            <div class="cart-item__details">
-                                <div class="items items--small counter-wrapper">
-                                    <div class="items__control" data-action="minus">-</div>
-                                    <div class="items__current" data-counter>${productInfo.counter}</div>
-                                    <div class="items__control" data-action="plus">+</div>
-                                </div>
-                                <div class="price">
-                                    <div class="price__currency">${productInfo.price}</div>
-                                </div>
-                                <button class="btn btn-danger btn-sm remove-item">×</button>
-                            </div>
+                        <div class="price">
+                            <div class="price__currency">${productInfo.price}</div>
                         </div>
+                        <button class="btn btn-danger btn-sm remove-item">×</button>
                     </div>
                 </div>
-            `;
-        
-            cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
-        
-            // Синхронізуємо з карткою товару
-            updateCardCounter(productInfo.id, parseInt(productInfo.counter));
-        }
+            </div>
+        </div>
+    `;
+
+    cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
+
+    // Синхронізуємо з карткою товару
+    updateCardCounter(productInfo.id, 1); // Ставимо значення 1 для нових товарів
+}
         calcCartPrice()
     }
     ToogleCartStatus();
