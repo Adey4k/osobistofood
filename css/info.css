@@ -36,7 +36,7 @@ h3, h4 {
     font-size: 24px;
 }
 
-/* Основной стиль для десктопа */
+
 .row {
     display: flex; /* Flex-контейнер для расположения в строку */
     flex-wrap: wrap; /* Перенос содержимого при нехватке места */
@@ -59,22 +59,28 @@ h3, h4 {
     text-align: left;
 }
 
-/* Стиль для мобильных устройств */
+.btn-block {
+    display: block; /* Кнопка занимает всю ширину родителя */
+    width: 100%; /* Ширина кнопки совпадает с шириной контейнера */
+    margin-top: auto;
+}
+
+/*Відображення для мобільних телефонів*/
 @media (max-width: 768px) {
     .row {
-        flex-direction: column; /* Переключаем на вертикальный макет */
-        align-items: center; /* Центрируем содержимое */
+        flex-direction: column; 
+        align-items: center; 
     }
 
     .image-container,
     .card.mb-3 {
-        max-width: 97%; /* Блоки занимают 100% ширины родителя */
-        flex: 0 0 auto; /* Убираем гибкость для сохранения размеров */
-        text-align: center; /* Выравниваем текст по центру */
+        max-width: 97%; 
+        flex: 0 0 auto; 
+        text-align: center; 
     }
 
     .card.mb-3 {
-        margin-top: 10px; /* Отступ между картинкой и текстом */
+        margin-top: 10px; 
     }
 }
 

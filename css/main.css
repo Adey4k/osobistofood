@@ -10,9 +10,9 @@ h3, h4 {
 
 header {
     display: flex;
-    justify-content: space-between; /* Элементы распределяются по краям */
-    align-items: center; /* Выравнивание по вертикали */
-    width: 100%; /* Хэдер занимает всю ширину */
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
 }
 
 .product-img {
@@ -241,42 +241,42 @@ header {
 
 
 .cart-item {
-    position: relative; /* Это нужно для позиционирования крестика внутри каждого товара */
+    position: relative; 
 }
 
 .cart-item .remove-item {
-    position: absolute; /* Абсолютное позиционирование внутри каждого товара */
-    top: 5px; /* Отступ сверху */
-    right: 5px; /* Отступ справа */
-    background: transparent; /* Прозрачный фон */
-    border: none; /* Убираем границу */
-    color: #eb5a1e; /* Цвет крестика */
-    font-size: 16px; /* Размер крестика */
-    font-weight: bold; /* Жирность */
-    cursor: pointer; /* Указатель при наведении */
+    position: absolute; 
+    top: 5px; 
+    right: 5px; 
+    background: transparent; 
+    border: none; 
+    color: #eb5a1e; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
     line-height: 1;
     padding: 0;
-    z-index: 10; /* Чтобы крестик был сверху */
+    z-index: 10; 
 }
 
 .cart-item .remove-item:hover {
-    color: #ff3e00; /* Цвет крестика при наведении */
-    transform: scale(1.2); /* Увеличение при наведении */
-    transition: 0.2s ease-in-out; /* Плавный переход */
+    color: #ff3e00; 
+    transform: scale(1.2); 
+    transition: 0.2s ease-in-out; 
 }
 
 .product-info {
-    margin: 20px; /* Отступы снаружи */
-    padding: 15px; /* Внутренние отступы */
-    background-color: #fff; /* Фон для теста */
-    border-radius: 8px; /* Скругленные углы */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+    margin: 20px;
+    padding: 15px; 
+    background-color: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .product-img-info {
-    width: 60%; /* Уменьшение до 75% */
-    height: auto; /* Сохранение пропорций */
-    display: block; /* Убирает inline эффекты */
-    margin: 0 auto; /* Центрирование изображения */
+    width: 60%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
 }
 
