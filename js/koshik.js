@@ -19,55 +19,62 @@ window.addEventListener('click', function (event) {
 
         if (itemInCart) {
             const counterElement = itemInCart.querySelector('[data-counter]');
-            counterElement.innerText = parseInt(counterElement.innerText) + parseInt(productInfo.counter);
+            const newCounterValue = parseInt(counterElement.innerText) + 1;
+        
+            counterElement.innerText = newCounterValue;
+        
         } else {
             const cartItemHTML = `
-            <div class="cart-item" data-id="${productInfo.id}">
-                <div class="cart-item__top">
-                    <div class="cart-item__img">
-                        <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
-                    </div>
-                    <div class="cart-item__desc">
-                        <div class="cart-item__title">${productInfo.title}</div>
-                        <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
-                        <div class="cart-item__details">
-                            <div class="items items--small counter-wrapper">
-                                <div class="items__control" data-action="minus">-</div>
-                                <div class="items__current" data-counter>${productInfo.counter}</div>
-                                <div class="items__control" data-action="plus">+</div>
+                <div class="cart-item" data-id="${productInfo.id}">
+                    <div class="cart-item__top">
+                        <div class="cart-item__img">
+                            <img src="${productInfo.imgSrc}" alt="${productInfo.title}">
+                        </div>
+                        <div class="cart-item__desc">
+                            <div class="cart-item__title">${productInfo.title}</div>
+                            <div class="cart-item__weight">${productInfo.itemsInBox} / ${productInfo.weight}</div>
+                            <div class="cart-item__details">
+                                <div class="items items--small counter-wrapper">
+                                    <div class="items__control" data-action="minus">-</div>
+                                    <div class="items__current" data-counter>${productInfo.counter}</div>
+                                    <div class="items__control" data-action="plus">+</div>
+                                </div>
+                                <div class="price">
+                                    <div class="price__currency">${productInfo.price}</div>
+                                </div>
+                                <button class="btn btn-danger btn-sm remove-item">×</button>
                             </div>
-                            <div class="price">
-                                <div class="price__currency">${productInfo.price}</div>
-                            </div>
-                            <button class="btn btn-danger btn-sm remove-item">×</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
         
             cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
+        
+            // Синхронізуємо з карткою товару
+            updateCardCounter(productInfo.id, parseInt(productInfo.counter));
         }
-
-        // Обновляем отображение статуса корзины
-        ToogleCartStatus();
         calcCartPrice()
-        // Сбрасываем счетчик карточки
-        updateCardCounter(productInfo.id, 1);
     }
+    ToogleCartStatus();
 });
 
-// Обновление статуса корзины
+// Оновлення статусу корзини
 function ToogleCartStatus() {
     const cartEmptyBadge = document.querySelector('[data-cart-empty]');
+    const orderButton = document.querySelector('#order-form .btn-primary'); 
+
     if (cartWrapper.children.length > 0) {
         cartEmptyBadge.classList.add('none');
+        orderButton.disabled = false; 
     } else {
         cartEmptyBadge.classList.remove('none');
+        orderButton.disabled = true; 
     }
 }
 
-// Обработка изменения количества в карточке или корзине
+
+//Зміна лічільника для каруселі та корзини
 window.addEventListener('click', function (event) {
     const counterWrapper = event.target.closest('.counter-wrapper');
     if (!counterWrapper) return;
@@ -79,7 +86,6 @@ window.addEventListener('click', function (event) {
         if (parseInt(counter.innerText) > 1) {
             counter.innerText = --counter.innerText;
         } else if (isInCart) {
-            // Удаляем товар из корзины, если его количество стало 0
             event.target.closest('.cart-item').remove();
         }
     }
@@ -91,18 +97,16 @@ window.addEventListener('click', function (event) {
 
     const productId = event.target.closest('[data-id]').dataset.id;
 
+    //Синхронізація лічильників в каруселі і магазині
     if (isInCart) {
-        // Синхронизация корзина/карточка
         updateCardCounter(productId, parseInt(counter.innerText));
     } else {
-        // Синхронизация карточка/корзина
         updateCartCounter(productId, parseInt(counter.innerText));
     }
     calcCartPrice();
     ToogleCartStatus();
 });
 
-// Функция для обновления количества в карточке товара
 function updateCardCounter(productId, newCounterValue) {
     const card = document.querySelector(`.card[data-id="${productId}"]`);
     if (card) {
@@ -111,14 +115,12 @@ function updateCardCounter(productId, newCounterValue) {
     }
 }
 
-// Функция для обновления количества в корзине
 function updateCartCounter(productId, newCounterValue) {
     const cartItem = cartWrapper.querySelector(`.cart-item[data-id="${productId}"]`);
     if (cartItem) {
         const cartCounter = cartItem.querySelector('[data-counter]');
         cartCounter.innerText = newCounterValue;
     } else if (newCounterValue > 0) {
-        // Если товара нет в корзине, добавляем его
         const card = document.querySelector(`.card[data-id="${productId}"]`);
         if (card) {
             const productInfo = {
@@ -157,6 +159,7 @@ function updateCartCounter(productId, newCounterValue) {
             cartWrapper.insertAdjacentHTML('beforeend', cartItemHTML);
         }
     }
+    ToogleCartStatus();
 }
 function calcCartPrice() {
     const cartItems = cartWrapper.querySelectorAll('.cart-item');
@@ -181,14 +184,8 @@ cartWrapper.addEventListener('click', function (event) {
     if (event.target.classList.contains('remove-item')) {
         const cartItem = event.target.closest('.cart-item');
         const productId = cartItem.dataset.id;
-
-        // Удаляем товар из корзины
         cartItem.remove();
-
-        // Сбрасываем счетчик в карточке
         updateCardCounter(productId, 1);
-
-        // Обновляем статус корзины и общую стоимость
         ToogleCartStatus();
         calcCartPrice();
     }

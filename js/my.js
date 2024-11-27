@@ -1,43 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
+    ToogleCartStatus();
     const modal = document.getElementById('order-modal');
     const orderButton = document.querySelector('#order-form .btn-primary'); // Кнопка "Замовити"
     const closeModal = modal.querySelector('.close');
-
-    // Открытие модального окна
-    orderButton.addEventListener('click', function (event) {
-        event.preventDefault(); // Отменяем стандартное поведение кнопки
-        modal.style.display = 'block';
-    });
-
-    // Закрытие модального окна (крестик)
-    closeModal.addEventListener('click', function () {
-        modal.style.display = 'none';
-    });
-
-    // Закрытие модального окна при клике на затемненный фон
-    window.addEventListener('click', function (event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-    // Обработка отправки формы
-    modal.querySelector('form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Предотвращаем отправку формы
-
-        // Здесь можно добавить логику для обработки данных формы
-        alert('Замовлення прийнято! Дякуємо!');
-        modal.style.display = 'none'; // Закрываем модальное окно
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const modal = document.getElementById('order-modal');
-    const orderButton = document.querySelector('#order-form .btn-primary');
-    const closeModal = modal.querySelector('.close');
     const orderDetails = document.getElementById('order-details');
 
-    // Функция для заполнения модального окна
+    // Функція для заповнення модального вікна
     function updateOrderDetails() {
         const cartItems = document.querySelectorAll('.cart-item');
         const totalPrice = document.querySelector('.total-price').innerText;
@@ -64,31 +32,36 @@ document.addEventListener('DOMContentLoaded', function () {
     
         orderDetails.innerHTML = orderHTML;
     }
-    
 
-    // Открытие модального окна
+    // Відкриття модального вікна
     orderButton.addEventListener('click', function (event) {
         event.preventDefault();
         updateOrderDetails();
         modal.style.display = 'block';
     });
 
-    // Закрытие модального окна
+    // Закриття модального вікна
     closeModal.addEventListener('click', function () {
         modal.style.display = 'none';
     });
 
-    // Закрытие при клике на фон
+    // Закриття форми при натисканні на пустий простір
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
             modal.style.display = 'none';
         }
     });
 
-    // Обработка отправки формы
-    modal.querySelector('form').addEventListener('submit', function (event) {
-        event.preventDefault();
-        alert('Замовлення прийнято! Дякуємо!');
-        modal.style.display = 'none';
-    });
+// Відправка форми
+modal.querySelector('form').addEventListener('submit', function (event) {
+    event.preventDefault(); 
+    alert('Замовлення прийнято! Дякуємо!');
+    const orderForm = modal.querySelector('form'); 
+    orderForm.reset(); 
+    modal.style.display = 'none'; 
+    cartWrapper.innerHTML = '';
+    ToogleCartStatus();
+    const totalPrice = document.querySelector('.total-price');
+    totalPrice.innerText = '0';
+});
 });
