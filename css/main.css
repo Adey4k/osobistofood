@@ -8,9 +8,11 @@ h3, h4 {
 
 }
 
-.header {
-	padding-top: 50px;
-	padding-bottom: 50px;
+header {
+    display: flex;
+    justify-content: space-between; /* Элементы распределяются по краям */
+    align-items: center; /* Выравнивание по вертикали */
+    width: 100%; /* Хэдер занимает всю ширину */
 }
 
 .product-img {
