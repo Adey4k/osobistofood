@@ -42,20 +42,36 @@ h3, h4 {
     z-index: 1000; 
 }
 
-.product-img-info {
-    width: 398px; /* Фиксированная ширина изображения */
-    height: auto; /* Сохраняет пропорции */
-    display: block;
-    margin: 0 auto;
+.image-container {
+    flex: 0 0 auto; /* Избегаем сжатия контейнера */
+    max-width: 30%; /* Устанавливаем максимальную ширину контейнера с изображением */
 }
 
-.image-container {
-    width: 398px; /* Совпадает с шириной изображения */
+.product-img-info {
+    width: 100%; /* Картинка растягивается на всю ширину контейнера */
+    height: auto; /* Сохраняем пропорции */
 }
 
 .card.mb-3 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex: 1; /* Контейнер с текстом занимает оставшееся пространство */
+    padding: 15px;
     text-align: left;
+}
+
+.row {
+    display: flex; /* Устанавливаем flex для строки */
+    flex-wrap: wrap; /* Позволяем перенос содержимого на новую строку при необходимости */
+    gap: 10px; /* Пространство между элементами */
+}
+
+h1{
+font-size: 50px;
+}
+
+.main-text-info{
+font-size: 25px;
+}
+
+p{
+font-size: 20px;
 }
