@@ -174,7 +174,7 @@
 						<!-- Вартість замовлення -->
 						<div class="cart-total">
 							<p><span class="h5">Доставка:</span> <span class="delivery-cost free">безкоштовна</span> </p>
-							<p><span class="h5">До сплати:</span> <span class="total-price">250</span> <span class="rouble">грн.</span></p>
+							<p><span class="h5">До сплати:</span> <span class="total-price">0</span> <span class="rouble">грн.</span></p>
 						</div>
 						<!-- // Вартість замовлення -->
 
@@ -182,7 +182,7 @@
 
 					<!-- Оформити замовлення -->
 					<div id="order-form" class="card-body border-top">
-							<button type="submit" class="btn btn-primary">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+							<button type="submit" class="btn btn-primary" disabled>ОФОРМИТИ ЗАМОВЛЕННЯ</button>
 					</div>
 					<!-- // Оформити замовлення -->
 
@@ -198,7 +198,6 @@
 			<span class="close">&times;</span>
 			<h2>Оформлення замовлення</h2>
 			<div id="order-details">
-				<!-- Сюда будет добавляться информация о заказе -->
 			</div>
 			<form id="order-form">
 				<div class="form-group">
@@ -208,6 +207,8 @@
 				<div class="form-group">
 					<label for="customer-phone">Номер телефону:</label>
 					<input type="tel" id="customer-phone" class="form-control" placeholder="Введіть ваш номер телефону" required>
+					<input type="checkbox" id="no-call" class="form-check-input">
+					<label for="no-call" class="form-check-label">Не телефонувати мені</label>
 				</div>
 				<div class="form-group">
 					<label for="order-notes">Додаткова інформація:</label>
@@ -215,6 +216,7 @@
 				</div>
 				<button type="submit" class="btn btn-primary">Підтвердити замовлення</button>
 			</form>
+			
 		</div>
 	</div>
 	
