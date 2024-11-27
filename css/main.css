@@ -16,8 +16,8 @@ h3, h4 {
 .product-img {
 	width: 265px;
 	height: auto;
-	margin-left: auto;
-	margin-right: auto;
+	display: block;
+	margin: 0 auto;
 }
 
 .item-title {
@@ -262,3 +262,19 @@ h3, h4 {
     transform: scale(1.2); /* Увеличение при наведении */
     transition: 0.2s ease-in-out; /* Плавный переход */
 }
+
+.product-info {
+    margin: 20px; /* Отступы снаружи */
+    padding: 15px; /* Внутренние отступы */
+    background-color: #fff; /* Фон для теста */
+    border-radius: 8px; /* Скругленные углы */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень */
+}
+
+.product-img-info {
+    width: 60%; /* Уменьшение до 75% */
+    height: auto; /* Сохранение пропорций */
+    display: block; /* Убирает inline эффекты */
+    margin: 0 auto; /* Центрирование изображения */
+}
+
